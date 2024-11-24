@@ -1,0 +1,95 @@
+* {
+    box-sizing: border-box; /* Ensure padding and border are included in the total width/height */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.container {
+    margin: 20px;
+}
+
+.bingo-card {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 equal columns */
+    gap: 0; /* No gap between cells */
+    border: 2px solid #007bff; /* Blue border around the entire card */
+    border-radius: 10px;
+    background-color: #e9f7ff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto; /* Center the card */
+    width: 100%; /* Make the card take the full available width */
+}
+
+.bingo-card div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    background-color: #ffffff;
+    border: 1px solid #007bff;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+    aspect-ratio: 1; /* Maintain square cells */
+}
+
+.bingo-card div:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Header row styles */
+.bingo-card div:first-child,
+.bingo-card div:nth-child(2),
+.bingo-card div:nth-child(3),
+.bingo-card div:nth-child(4),
+.bingo-card div:nth-child(5) {
+    font-size: 24px; /* Larger font size for the first row */
+    font-weight: bold;
+}
+
+/* FREE space styles */
+.free-space {
+    background-color: #d9534f; /* Red background */
+    color: white;
+    font-weight: bold;
+    cursor: default; /* Prevent clicking */
+}
+
+/* Marked cells with X */
+.marked {
+    background-color: #d9534f; /* Red background for marked cells */
+    color: white;
+    font-weight: bold;
+}
+
+/* Header styling */
+h1 {
+    color: #007bff;
+    font-size: 24px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+}

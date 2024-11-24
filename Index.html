@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Card Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bingo Card Generator</h1>
+
+<!--         <h2>Generate Your Custom Bingo Card</h2>
+        <table id="customTable">
+            <tbody>
+                <tr>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                </tr>
+                <tr>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                </tr>
+                <tr>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                </tr>
+                <tr>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                </tr>
+                <tr>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                    <td><input type="number" min="1" max="50"></td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <button onclick="generateCustomCard()">Generate Custom Card</button> -->
+        <div id="errorMessage" class="error"></div>
+
+        <h2>Generate a Random Bingo Card</h2>
+        <button onclick="generateRandomCard()">Generate Random Card</button>
+    </div>
+
+    <script>
+        // function generateCustomCard() {
+        //     const inputs = document.querySelectorAll('#customTable input');
+        //     const numbers = Array.from(inputs).map(input => parseInt(input.value));
+        //     const validNumbers = numbers.filter(num => num >= 1 && num <= 50);
+            
+        //     // Reset previous error highlighting
+        //     inputs.forEach(input => {
+        //         input.style.borderColor = '';
+        //     });
+
+        //     let hasError = false;
+
+        //     // Check for duplicates and out-of-range values
+        //     const uniqueNumbers = new Set();
+        //     numbers.forEach((num, index) => {
+        //         if (num < 1 || num > 50 || isNaN(num)) {
+        //             inputs[index].style.borderColor = 'red'; // Highlight out-of-range numbers
+        //             hasError = true;
+        //         } else if (uniqueNumbers.has(num)) {
+        //             inputs[index].style.borderColor = 'red'; // Highlight duplicates
+        //             hasError = true;
+        //         } else {
+        //             uniqueNumbers.add(num);
+        //         }
+        //     });
+
+        //     if (hasError) {
+        //         document.getElementById('errorMessage').textContent = "Please ensure all numbers are unique and between 1 and 50.";
+        //         return;
+        //     }
+
+        //     // Redirect to card page with numbers
+        //     const url = new URL('card.html', window.location.href);
+        //     url.searchParams.set('numbers', validNumbers.join(','));
+        //     window.location.href = url;
+        // }
+
+        function generateRandomCard() {
+            const uniqueNumbers = new Set();
+            while (uniqueNumbers.size < 25) {
+                const randomNum = Math.floor(Math.random() * 50) + 1;
+                uniqueNumbers.add(randomNum);
+            }
+            const numbers = Array.from(uniqueNumbers);
+
+            // Redirect to card page with generated numbers
+            const url = new URL('card.html', window.location.href);
+            url.searchParams.set('numbers', numbers.join(','));
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

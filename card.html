@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Card</title>
+    <style>
+        /* General styles for the Bingo Card */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: 20px;
+        }
+
+        .bingo-card {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 equal columns */
+            gap: 5px;
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            background-color: #e9f7ff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .bingo-card div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #007bff;
+            background-color: #ffffff;
+            font-size: 18px;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+            aspect-ratio: 1;
+        }
+
+        /* Highlight cell on hover */
+        .bingo-card div:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Marked cells with an "X" */
+        .bingo-card div.marked,
+        .bingo-card div.free-space {
+            background-color: #d9534f; /* Red background */
+            color: white;
+            font-weight: bold;
+        }
+
+        /* FREE space-specific styles */
+        .free-space {
+            cursor: default; /* Prevent interaction */
+            font-size: 14px;
+        }
+
+        h1 {
+            color: #007bff;
+            font-size: 24px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your BEAST BINGO Card</h1>
+        <div id="bingoCard" class="bingo-card"></div>
+        <button onclick="window.history.back()">Go Back</button>
+    </div>
+
+    <script>
+        // Get numbers from URL parameters
+        const params = new URLSearchParams(window.location.search);
+        const numbers = params.get('numbers').split(',').map(num => parseInt(num.trim()));
+
+        // Function to display the Bingo card
+        function displayCard(numbers) {
+            const card = document.getElementById('bingoCard');
+            card.innerHTML = ''; // Clear any existing content
+
+            // Add column headers for BEAST
+            const headers = ['B', 'E', 'A', 'S', 'T'];
+            headers.forEach(letter => {
+                const headerCell = document.createElement('div');
+                headerCell.textContent = letter;
+                headerCell.classList.add('header');
+                card.appendChild(headerCell);
+            });
+
+            // Add the numbers and FREE space
+            let numIndex = 0;
+            for (let i = 0; i < 5; i++) {
+                for (let j = 0; j < 5; j++) {
+                    const cell = document.createElement('div');
+
+                    // Center cell is "FREE"
+                    if (i === 2 && j === 2) {
+                        cell.textContent = 'FREE';
+                        cell.classList.add('free-space');
+                    } else {
+                        cell.textContent = numbers[numIndex++];
+                    }
+
+                    // Add click event to toggle "X"
+                    cell.addEventListener('click', () => {
+                        if (!cell.classList.contains('free-space')) {
+                            cell.classList.toggle('marked');
+                        }
+                    });
+
+                    card.appendChild(cell);
+                }
+            }
+        }
+
+        displayCard(numbers); // Render the Bingo card
+    </script>
+</body>
+</html>
